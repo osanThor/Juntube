@@ -20,7 +20,7 @@ function App() {
       .then((result) => setVideos(result.items))
       .catch((error) => console.log("error", error));
   }, []);
-
+  console.log("아노대");
   // useEffect(() => {
   //   youtube.mostPopular().then((videos) => setVideos(videos));
   //   console.log(videos);
