@@ -11,7 +11,7 @@ class Youtube {
         maxResults: 25,
       },
     });
-    return res.data;
+    return res.data.items;
   }
 }
 
