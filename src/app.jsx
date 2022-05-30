@@ -1,31 +1,50 @@
 import "./app.css";
 import MainContainer from "./container/mainContainer";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import Header from "./components/common/header/header";
 
 function App({ youtube }) {
   const [videos, setVideos] = useState([]);
-  const [title, setTitle] = useState("title");
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const inputRef = useRef();
 
-  // useEffect(() => {
-  //   const requestOptions = {
-  //     method: "GET",
-  //     redirect: "follow",
-  //   };
+  const handleReset = () => {
+    setSelectedVideo(null);
+    youtube.mostPopular().then((videos) => setVideos(videos));
+    inputRef.current.vlaue = "";
+  };
+  const handelSelectVideo = (video) => {
+    setSelectedVideo(video);
+  };
 
-  //   fetch(
-  //     "https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=AIzaSyAVPp5o7B2ImYJIlQeJ5Bbmegy_6F_GYxU",
-  //     requestOptions
-  //   )
-  //     .then((response) => response.json())
-  //     .then((result) => setVideos(result.items))
-  //     .catch((error) => console.log("error", error));
-  // }, []);
+  const handelSearch = useCallback(
+    (query) => {
+      setSelectedVideo(null);
+      youtube.search(query).then((video) => {
+        setVideos(video);
+      });
+    },
+    [youtube]
+  );
 
   useEffect(() => {
     youtube.mostPopular().then((videos) => setVideos(videos));
   }, [youtube]);
 
-  return <MainContainer videos={videos} />;
+  return (
+    <>
+      <Header
+        onSearch={handelSearch}
+        handleReset={handleReset}
+        inputRef={inputRef}
+      />
+      <MainContainer
+        videos={videos}
+        onSelectVideo={handelSelectVideo}
+        selectedVideo={selectedVideo}
+      />
+    </>
+  );
 }
 
 export default App;

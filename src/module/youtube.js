@@ -4,7 +4,7 @@ class Youtube {
   }
 
   async mostPopular() {
-    const res = await this.youtube.get("videos", {
+    const res = await this.youtube.get("/videos", {
       params: {
         part: "snippet",
         chart: "mostPopular",
@@ -12,6 +12,20 @@ class Youtube {
       },
     });
     return res.data.items;
+  }
+
+  async search(query) {
+    const res = await this.youtube.get("/search", {
+      params: {
+        part: "snippet",
+        maxResults: 25,
+        q: query,
+      },
+    });
+    return res.data.items.map((item) => ({
+      ...item,
+      id: item.id.videoId,
+    }));
   }
 }
 

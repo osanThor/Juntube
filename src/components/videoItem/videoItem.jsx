@@ -3,15 +3,17 @@ import styled from "styled-components";
 
 const VideoItemBlock = styled.li`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  width: 50%;
-  border: 1px solid lightgray;
+  min-width: 200px;
+  background-color: #171717;
   cursor: pointer;
 
   .thumbnail {
-    width: 40%;
-    height: 100%;
+    width: 100%;
+    height: 70%;
     overflow: hidden;
+
     img {
       width: 100%;
       height: 100%;
@@ -20,29 +22,34 @@ const VideoItemBlock = styled.li`
   }
 
   .description {
-    width: 60%;
-    padding: 1rem;
-
+    width: 100%;
+    height: 30%;
+    padding: 0.5rem;
     h1 {
       font-size: 0.8rem;
       display: -webkit-box;
     }
     p {
-      font-size: 0.6rem;
+      font-size: 0.8rem;
     }
   }
 
   &:hover {
+    background-color: #383838;
     .thumbnail {
       img {
         transform: scale(1.05);
       }
     }
   }
+
+  & {
+    margin-bottom: 1rem;
+  }
 `;
-const VideoItem = ({ video: { snippet } }) => {
+const VideoItem = ({ video, video: { snippet }, onSelectVideo }) => {
   return (
-    <VideoItemBlock>
+    <VideoItemBlock onClick={() => onSelectVideo(video)}>
       <div className="thumbnail">
         <img src={snippet.thumbnails.medium.url} alt="" />
       </div>

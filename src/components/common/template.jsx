@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const TemplateBlock = styled.div`
   width: 100%;
-  background: #070000;
+  background: #171717;
   color: white;
   display: flex;
   justify-content: center;
@@ -11,10 +11,17 @@ const TemplateBlock = styled.div`
 
   .contents {
     width: 100%;
-    max-width: 800px;
+    max-width: 1600px;
     height: 100%;
-    border-right: 1px solid white;
-    border-left: 1px solid white;
+    border-right: 1px solid #413c3c;
+    border-left: 1px solid #413c3c;
+    display: flex;
+    padding: 0 0.7rem;
+
+    @media (max-width: 1024px) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `;
 const Template = ({ children }) => {
