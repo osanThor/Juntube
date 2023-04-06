@@ -1,4 +1,3 @@
-import "./app.css";
 import MainContainer from "./container/mainContainer";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Header from "./components/common/header/header";
