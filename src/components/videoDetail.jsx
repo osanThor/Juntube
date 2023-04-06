@@ -4,7 +4,6 @@ import styled from "styled-components";
 const VideoDetailBlock = styled.div`
   width: 80%;
   padding: 1rem;
-
   h2 {
     color: white;
     font-size: 1.75rem;
